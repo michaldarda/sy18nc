@@ -1,0 +1,67 @@
+en:
+  errors:
+    messages:
+      not_found: "not found"
+      already_confirmed: "was already confirmed"
+      not_locked: "was not locked"
+  devise:
+    failure:
+      already_authenticated: 'Already authenticated.'
+      unauthenticated: 'You need to sign in before continuing.'
+      unconfirmed: 'You have to confirm your account before continuing.'
+      locked: 'Your account is locked.'
+      invalid: 'Invalid email or password.'
+      invalid_token: 'Invalid authentication token.'
+      timeout: 'Your session expired, please sign in again to continue.'
+      inactive: 'Your account was not activated yet.'
+    sessions:
+      signed_in: 'Signed in successfully.'
+      signed_out: 'Signed out successfully.'
+    passwords:
+      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
+      updated: 'Your password was changed successfully. You are now signed in.'
+      send_paranoid_instructions: "If your account exists in our userbase, you will receive an email with an instruction how to reset you password."
+    confirmations:
+      send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
+      send_paranoid_instructions: 'If your email exists in our userbase, you will receive an email with an instruction how to activate your account.'
+      confirmed: 'Your account was successfully confirmed. You are now signed in.'
+    registrations:
+      nested:
+        more_nested:
+          range:
+          - Current
+          - 3 days
+          - 7 days
+          - 1 month
+          - 3 months
+      signed_up: 'You have signed up successfully.'
+      inactive_signed_up: 'You have signed up successfully, however you were not signed in because your account is %{reason}.'
+      updated: 'You updated your account successfully.'
+      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
+    unlocks:
+      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
+      unlocked: 'Your account was successfully unlocked. You are now signed in.'
+      send_paranoid_instructions: 'If your account exists in our userbase, you will receive an email with an instruction how to unlock your account.'
+    mailer:
+      confirmation_instructions:
+        subject: 'Confirmation instructions'
+      reset_password_instructions:
+        subject: 'Reset password instructions'
+      unlock_instructions:
+        subject: 'Unlock Instructions'
+      website:
+        one: "eine Website"
+        few: "%{count} Websites"
+        many: "%{count} Websites"
+        other: "%{count} Websites"
+    omniauth_callbacks:
+      empty_key:
+      success: "Successfully authorized from %{kind} account"
+      user:
+        failure: "Unexpected Authorization failure, please try again."
+        range:
+        - Current
+        - 3 days
+        - 7 days
+        - 1 month
+        - 3 months

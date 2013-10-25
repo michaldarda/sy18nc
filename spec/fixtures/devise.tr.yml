@@ -1,0 +1,35 @@
+tr:
+  devise:
+    confirmations:
+      confirmed: "Hesabınız doğrulandı ve giriş yaptınız."
+      send_paranoid_instructions: "Eğer mail adresiniz kullanıcı tabanında mevcutsa, hesabınızı nasıl aktif edeceğinizi anlatan bir mail alacaksınız"
+    failure:
+      already_authenticated: "Zaten doğrulandı"
+      inactive: "Hesabınız henüz aktif değil."
+      invalid: "Geçersiz email ya da şifre"
+      invalid_token: "Geçersiz doğrulama tokeni"
+      locked: "Hesabınız kilitlendi"
+      timeout: "Oturum süresi doldu. Devam etmek için lütfen tekrar giriş yapınız"
+      unauthenticated: "Devam etmeden önce giriş yapmanız gerekiyor."
+      unconfirmed: "Devam edebilmek için hesabınızı doğrulamanız gerek."
+    mailer:
+      reset_password_instructions:
+        subject: "Şifre sıfırlama talimatları"
+      unlock_instructions:
+        subject: "Bloke açma talimatları"
+    omniauth_callbacks:
+      success: "Successfully authorized from %{kind} account"
+    passwords:
+      send_instructions: "Hesap şifrenizi nasıl değiştirebileceğinizi gösteren bir mail alacaksınız."
+      send_paranoid_instructions: "Eğer hesabınız kullanıcı tabanımızda mevcutsa, hesap şifrenizi nasıl değiştirebileceğinizi gösteren bir mail alacaksınız."
+      updated: "Şifreniz başarılı bir şekilde değiştirildi. Şimdi giriş yaptınız."
+    registrations:
+      destroyed: "Güle güle! Hesabınız iptal edildi. Umarız yakın zamanda tekrar sizi aramızda görürüz."
+      inactive_signed_up: "Başarılı bir şekilde üyelik oluşturdunuz fakat giriş yapamadınız çünkü hesabınız  %{reason}"
+    sessions:
+      signed_in: "Başarılı bir şekilde giriş yapıldı."
+      signed_out: "Çıkış yapıldı"
+    unlocks:
+      send_instructions: "Bir kaç dakika içerisinde hesabınızı nasıl açacağınıza dair mail alacaksınız"
+      send_paranoid_instructions: "Eğer hesabınız kullanıcı tabanımızda mevcutsa, bir kaç dakika içerisinde hesabınızı nasıl açacağınıza dair mail alacaksınız"
+      unlocked: "Hesabınız başarılı bir şekilde açıldı ve şimdi giriş yaptınız."

@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+require_relative "../lib/sy18nc"
+
+require 'optparse'
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: sy18nc [options]"
+
+  if ARGV.empty?
+    puts opts.banner
+    exit
+  end
+
+  opts.on("-b", "--backup", "Create backup") do |b|
+    options[:backup] = b
+  end
+end.parse!
+
+synchronizer = Sy18nc::Synchronizer.new(*ARGV, options)
+synchronizer.synchronize_all
