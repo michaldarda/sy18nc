@@ -12,6 +12,12 @@ describe Sy18nc::Translation do
     translation = Sy18nc::Translation.new("spec/fixtures/devise.tr.yml")
     translation.hash.wont_be_empty
     translation.hash.must_be_kind_of Hash
+    assert translation.synchronizable?
+  end
+
+  it "is not synchronizable when YAML is not valid" do
+    t = Sy18nc::Translation.new("spec/fixtures/not_valid.yml")
+    refute t.synchronizable?
   end
 
   it "fetches the translation body" do

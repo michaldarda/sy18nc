@@ -1,6 +1,6 @@
 # Sy18nc
 
-Dead simple tool to synchronize Rails .ymls with translations
+Simple tool to synchronize Rails .ymls with translations
 
 ## Installation
 

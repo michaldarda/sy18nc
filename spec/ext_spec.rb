@@ -109,6 +109,10 @@ describe Hash do
   describe String do
     it "marking as fixme" do
       "Hello".mark_fixme!.must_equal("Hello g FIXME")
+
+      "Hello g FIXME".mark_fixme!.must_equal("Hello g FIXME")
+
+      "*hello_world".mark_fixme!.must_equal("*hello_world")
     end
   end
 end
