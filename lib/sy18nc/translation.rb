@@ -54,21 +54,21 @@ module Sy18nc
     # little trick:
     # fetch with the comments
     def replace_fixmes(file)
-      f = File.read(File.expand_path(file))
-      f = f.gsub("\' # FIXME", " g FIXME\'")
-      f = f.gsub("\" # FIXME", " g FIXME\"")
-      f = f.gsub("# FIXME", "g FIXME")
-      f
+      file = File.read(File.expand_path(file))
+      file = file.gsub("\' # FIXME", " g FIXME\'")
+      file = file.gsub("\" # FIXME", " g FIXME\"")
+      file = file.gsub("# FIXME", "g FIXME")
+      file
     end
 
     # little trick:
     # restore fixmes
-    def restore_fixmes(yaml)
-      yaml.gsub!("\sg FIXME\"", "\" # FIXME")
-      yaml.gsub!("\sg FIXME\'", "\' # FIXME")
-      yaml.gsub!("g FIXME", "# FIXME")
-      yaml.gsub!("\"# FIXME\"", "# FIXME")
-      yaml
+    def restore_fixmes(file)
+      file.gsub!("\sg FIXME\"", "\" # FIXME")
+      file.gsub!("\sg FIXME\'", "\' # FIXME")
+      file.gsub!("g FIXME", "# FIXME")
+      file.gsub!("\"# FIXME\"", "# FIXME")
+      file
     end
   end
 end
