@@ -78,6 +78,8 @@ ru:
     devise_tr.synchronize(devise_en)
     devise_tr.to_yaml.lines.count.must_equal devise_en.to_yaml.lines.count
     devise_tr.to_yaml.must_equal(File.read(File.expand_path("spec/fixtures/results/devise.tr.yml")))
+
+
   end
 
   def cleanup
