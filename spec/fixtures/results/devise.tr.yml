@@ -28,15 +28,15 @@ tr:
         other: "%{count} Websites" # FIXME
     omniauth_callbacks:
       success: "Successfully authorized from %{kind} account"
-      empty_key: 
+      empty_key:
       user:
         failure: "Unexpected Authorization failure, please try again." # FIXME
         range:
-        - Current # FIXME
-        - 3 days # FIXME
-        - 7 days # FIXME
-        - 1 month # FIXME
-        - 3 months # FIXME
+        - "Current" # FIXME
+        - "3 days" # FIXME
+        - "7 days" # FIXME
+        - "1 month" # FIXME
+        - "3 months" # FIXME
     passwords:
       send_instructions: "Hesap şifrenizi nasıl değiştirebileceğinizi gösteren bir mail alacaksınız."
       send_paranoid_instructions: "Eğer hesabınız kullanıcı tabanımızda mevcutsa, hesap şifrenizi nasıl değiştirebileceğinizi gösteren bir mail alacaksınız."
@@ -47,11 +47,11 @@ tr:
       nested:
         more_nested:
           range:
-          - Current # FIXME
-          - 3 days # FIXME
-          - 7 days # FIXME
-          - 1 month # FIXME
-          - 3 months # FIXME
+          - "Current" # FIXME
+          - "3 days" # FIXME
+          - "7 days" # FIXME
+          - "1 month" # FIXME
+          - "3 months" # FIXME
       signed_up: "You have signed up successfully." # FIXME
       updated: "You updated your account successfully." # FIXME
     sessions:

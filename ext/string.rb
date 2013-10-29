@@ -7,4 +7,10 @@ class String
 
     self.replace("#{self} g FIXME")
   end
+
+  def append!(val)
+    return self if self == ""
+
+    self.replace("#{self}#{val}")
+  end
 end
