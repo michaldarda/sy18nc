@@ -52,7 +52,7 @@ describe Hash do
     @hash.append!("appended_string").must_equal appended_hash
   end
 
-  it "deep marking as fixme" do
+  it "deep marks fixme" do
     fixme_hash = {
       :key1 => {
         key11: "Hello g FIXME",
@@ -74,7 +74,7 @@ describe Hash do
     @hash.must_equal fixme_hash
   end
 
-  it "deep merging and marks to fixme" do
+  it "deep merges and marks fixme" do
     other_hash = {
       :key1 => {
         key11: "Hello",
@@ -107,7 +107,7 @@ describe Hash do
   end
 
   describe String do
-    it "marking as fixme" do
+    it "marks fixme" do
       "Hello".mark_fixme!.must_equal("Hello g FIXME")
 
       "Hello g FIXME".mark_fixme!.must_equal("Hello g FIXME")
