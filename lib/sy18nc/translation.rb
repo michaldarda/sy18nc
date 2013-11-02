@@ -35,7 +35,7 @@ module Sy18nc
       # disable line wrap
       yaml = YAML.dump(hash, line_width: -1)
 
-      # force double quotes
+      # force double quotes in every value
       yaml.gsub!("foo \\nbar","")
       restore_fixmes(yaml)
     end
@@ -55,20 +55,18 @@ module Sy18nc
     # fetch with the comments
     def replace_fixmes(file)
       file = File.read(File.expand_path(file))
-      file = file.gsub("\' # FIXME", " g FIXME\'")
-      file = file.gsub("\" # FIXME", " g FIXME\"")
-      file = file.gsub("# FIXME", "g FIXME")
-      file
+      file.gsub("\' # FIXME", " g FIXME\'")
+        .gsub("\" # FIXME", " g FIXME\"")
+        .gsub("# FIXME", "g FIXME")
     end
 
     # little trick:
     # restore fixmes
     def restore_fixmes(file)
-      file.gsub!("\sg FIXME\"", "\" # FIXME")
-      file.gsub!("\sg FIXME\'", "\' # FIXME")
-      file.gsub!("g FIXME", "# FIXME")
-      file.gsub!("\"# FIXME\"", "# FIXME")
-      file
+      file.gsub("\sg FIXME\"", "\" # FIXME")
+        .gsub("\sg FIXME\'", "\' # FIXME")
+        .gsub("g FIXME", "# FIXME")
+        .gsub("\"# FIXME\"", "# FIXME")
     end
   end
 end
