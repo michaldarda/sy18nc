@@ -14,3 +14,4 @@ end.parse!
 
 synchronizer = Sy18nc::Synchronizer.new(*ARGV, options)
 synchronizer.synchronize_all
+
