@@ -9,6 +9,14 @@ describe Array do
     a.extract_options!.must_equal({})
     a.must_equal([1,2,3,4])
   end
+
+  it "appends" do
+    a = ["hello", "world"]
+
+    a.append!("appended_string")
+
+    a.must_equal ["helloappended_string", "worldappended_string"]
+  end
 end
 
 describe Hash do
@@ -50,9 +58,29 @@ describe Hash do
     }
 
     @hash.append!("appended_string").must_equal appended_hash
+
+    hash2 = {
+      :key1 => "helloworld",
+      :key2 =>
+        [
+          "hello",
+          "world"
+        ]
+      }
+
+    appended_hash2 = {
+      :key1 => "helloworldappended_string",
+      :key2 =>
+        [
+          "helloappended_string",
+          "worldappended_string"
+        ]
+      }
+
+    hash2.append!("appended_string").must_equal appended_hash2
   end
 
-  it "deep marking as fixme" do
+  it "deep marks fixme" do
     fixme_hash = {
       :key1 => {
         key11: "Hello g FIXME",
@@ -74,7 +102,7 @@ describe Hash do
     @hash.must_equal fixme_hash
   end
 
-  it "deep merging and marks to fixme" do
+  it "deep merges and marks fixme" do
     other_hash = {
       :key1 => {
         key11: "Hello",
@@ -106,8 +134,11 @@ describe Hash do
     other_hash.deep_merge!(@hash).must_equal result
   end
 
+  it "deep merges hashes with nested arrays" do
+  end
+
   describe String do
-    it "marking as fixme" do
+    it "marks fixme" do
       "Hello".mark_fixme!.must_equal("Hello g FIXME")
 
       "Hello g FIXME".mark_fixme!.must_equal("Hello g FIXME")

@@ -8,11 +8,7 @@ class Hash
       self[other_key] = if self_value.is_a?(Hash) && other_value.is_a?(Hash)
         self_value.deep_merge!(other_value)
       elsif self_value.nil?
-        if other_value.respond_to?(:mark_fixme!)
           other_value.mark_fixme!
-        else
-          other_value
-        end
       else
         self_value
       end
@@ -23,24 +19,19 @@ class Hash
   # Appends the val to the every string in nested hash
   def append!(val)
     self.each_pair do |key, value|
-      self[key] = case value
-      when Hash
-        value.append!(val)
-      when String
-        value + val
-      else value.nil?
-        value
-      end
+      self[key] = value.append!(val)
     end
+
     self
   end
 
   # Marks the nested hash values with g FIXME
   # see also mark_fixme! in string
   def mark_fixme!
-    self.each_pair do |k, v|
-      self[k] = v.mark_fixme!
+    self.each_pair do |key, value|
+      self[key] = value.mark_fixme!
     end
+
     self
   end
 

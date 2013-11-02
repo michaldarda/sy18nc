@@ -9,13 +9,15 @@ describe Sy18nc::Synchronizer do
     %x[rm spec/fixtures/*.bak]
   end
 
-  it "With no arguments synchronizes all the translations in the rails apps /config/locales dir" do
+  it "with no arguments synchronizes all the translations in the rails apps /config/locales dir" do
+    skip("Pending..")
   end
 
-  it "Never touches the original translations" do
+  it "never touches the original translation" do
+    skip("Pending..")
   end
 
-  it "It synchronizes translation only once" do
+  it "synchronizes translation only once" do
     3.times do
       @synchronizer.synchronize_all
       File.read(File.expand_path("spec/fixtures/ru.yml.bak")).must_equal %q[---
@@ -33,10 +35,11 @@ ru:
     end
   end
 
-  it "Produces the correct output for various translation combinations" do
+  it "produces the correct output for various translation combinations" do
+    skip("Pending..")
   end
 
-  it "When backup option is set to true saves as a backup file and not modify original files" do
+  it "when backup option is set to true saves as a backup file and does not modify original files" do
     refute File.exists?(File.expand_path("spec/fixtures/ru.yml.bak"))
     @synchronizer.synchronize_all
     assert File.exists?(File.expand_path("spec/fixtures/ru.yml.bak"))

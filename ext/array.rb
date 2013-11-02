@@ -16,9 +16,19 @@ class Array
     end
   end
 
+  def append!(val)
+    self.each do |v|
+      v.append!(val)
+    end
+
+    self
+  end
+
   def mark_fixme!
     self.each do |v|
       v.mark_fixme!
     end
+
+    self
   end
 end
