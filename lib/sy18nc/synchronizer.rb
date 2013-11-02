@@ -3,10 +3,10 @@ module Sy18nc
     def initialize(*files)
       @options = files.extract_options!
 
-      @base, *@translations = files
-      @path = File.expand_path(File.dirname(@base))
+      @path, @base, *@translations = files
+      @path = File.expand_path(@path)
 
-      @base = Translation.new(@base)
+      @base = Translation.new("#{@path}/#{@base}")
       @translations = @translations.map do |tfile|
         Translation.new("#{@path}/#{tfile}")
       end
