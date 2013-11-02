@@ -12,11 +12,12 @@ module Sy18nc
   end
 
   class Configuration
-    attr_accessor :base_locale, :locales_dir
+    attr_accessor :base_locale, :locales_dir, :synchronizable
 
     def initialize
       @base_locale = "en"
       @locales_dir = Dir.pwd + "/config/locales"
+      @synchronizable = []
     end
   end
 end
