@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Sy18nc::VERSION
   spec.authors       = ["Michał Darda"]
   spec.email         = ["michaldarda@gmail.com"]
-  spec.description   = %q{ Simple tool to synchronize Rails ymls with translations. }
-  spec.summary       = %q{ Simple tool to synchronize Rails ymls with translations. }
+  spec.description   = %q{ Simple tool to synchronize Rails ymls with locales. }
+  spec.summary       = %q{ Simple tool to synchronize Rails ymls with locales. }
   spec.homepage      = "https://github.com/michaldarda/sy18nc"
   spec.license       = "MIT"
 

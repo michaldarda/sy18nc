@@ -1,6 +1,10 @@
 # Sy18nc
 
-Simple tool to synchronize Rails .ymls with translations
+Simple tool to synchronize Rails .ymls with locales.
+
+## Requirements
+
+**This gem is compatible with Ruby 2.0 or higher. It will not work with lower Ruby versions.**
 
 ## Installation
 
@@ -16,58 +20,85 @@ Or install it yourself as:
 
     $ gem install sy18nc
 
-## Usage
+## Auto mode
 
-    sy18nc config/locales/en.yml ru.yml
+If you are using this gem with Rails app, you may create an initializer under your `config/initializers` named `sy18nc.rb`
+
+Sample initializer looks like this
+
+```ruby
+Sy18nc.configure do |c|
+  c.base_locale = "en"
+  c.locales_dir = "config/locales/"
+  c.locales = ["de", "es", "fr", "pl"]
+  c.files = ["application", "devise", "doorkeeper"]
+end
+```
+
+`base_locale` - your base locale, the rest of locales will be synchronized to this one (`en` by default).
+
+`locales_dir` - path to your .ymls with locales (`config/locales` by default)
+
+`locales` - the rest of your locales which you would like to keep in sync with the base one.
+
+`files` - all the files you want to keep in sync with the base one.
+
+Then you can execute
+
+    $ rake sy18nc
+
+It will look for every file in `files` list. For example, for `application` file it will find the `application.en` treating this as base and sync every `application.<lang>` which is listed in `locales` config.
+
+## Manual mode
+
+    sy18nc config/locales/ en.yml ru.yml
 
 Will synchronize the `ru` locale, treating `en` as base.
-
-**You have the guarantee that this tool will never touch and mess your original (base) translation!**
-
-    sy18nc config/locales/en.yml
-
-Will synchronize all translations in config/locales directory treating the `en.yml` as the base one.
 
 If run with `-b` or `--backup` option it will add the `.bak` extension to the output files instead of modifying original translation files.
 
 Example:
 
-    sy18nc -b config/locales/en.yml ru.yml
+    sy18nc -b config/locales/ en.yml ru.yml
 
 or:
 
-    sy18nc --backup config/locales/en.yml ru.yml
+    sy18nc --backup config/locales/ en.yml ru.yml
 
 ## Example
 
-Lets see how it will handle these translation:
+Lets assume we have two locales:
 
 en.yml:
 
     en:
-      promo:
+      application:
         link1: Hello
         link2: Hello
 
 ru.yml:
 
     ru:
-      promo:
+      application:
         link1: Birbevoon
 
 Command:
 
-    sy18nc config/locales/en.yml ru.yml
+    sy18nc config/locales/ en.yml ru.yml
 
 Will result in:
 
     ru:
-      promo:
+      application:
         link1: Birbevoon
         link2: Hello # FIXME
 
-As you can see, it will import missing translation from base (en.yml in this case) and add useful `# FIXME` notice,
-informing you that there is something missing in this translation and you need to fix it.
+As you can see, it imported missing locales from base (en.yml in this case) and added useful `# FIXME` notice,
+informing you that there is something missing in this locales and you need to fix it.
+
+## Issues
+
+Please post any issues via Github Issues. If you want to contribute, see Contributing section on ths page.
 
 ## Contributing
 
