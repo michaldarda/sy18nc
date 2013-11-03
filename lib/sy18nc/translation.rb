@@ -46,7 +46,6 @@ module Sy18nc
       filename = "#{filename}.bak" if options[:backup]
 
       file = File.new(filename, "w+")
-
       file.write(self.to_yaml)
       file.close
     end

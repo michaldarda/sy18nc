@@ -8,8 +8,9 @@ task :sy18nc => :environment do
     end
 
     files.flatten!
+    options = {}
 
-    synchronizer = Sy18nc::Synchronizer.new(*files)
+    synchronizer = Sy18nc::Synchronizer.new(*files, options)
     synchronizer.synchronize_all
   end
 end
