@@ -12,21 +12,5 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-def synchronize_using_config
-  Sy18nc.config.synchronizable.each do |s|
-    files = [Sy18nc.config.locales.dir]
-    files << Sy18nc.config.locales.map do |l|
-      "#{s}.#{l}"
-    end
-
-    synchronizer = Sy18nc::Synchronizer.new(files, options)
-    synchronizer.synchronize_all
-  end
-end
-
-if ARGS.empty?
-  synchronize_using_config
-else
-  synchronizer = Sy18nc::Synchronizer.new(*ARGV, options)
-  synchronizer.synchronize_all
-end
+synchronizer = Sy18nc::Synchronizer.new(*ARGV, options)
+synchronizer.synchronize_all
