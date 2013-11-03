@@ -4,6 +4,7 @@ module Sy18nc
       @options = files.extract_options!
 
       @path, @base, *@translations = files
+
       @path = File.expand_path(@path)
 
       @base = Translation.new("#{@path}/#{@base}")
