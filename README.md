@@ -24,6 +24,10 @@ Or install it yourself as:
 
 If you are using this gem with Rails app, you may create an initializer under your `config/initializers` named `sy18nc.rb`
 
+This command will create it for you:
+
+    $ rake sy18nc:install
+
 Sample initializer looks like this
 
 ```ruby
