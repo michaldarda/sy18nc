@@ -6,6 +6,7 @@ module Sy18nc
       @name = File.basename(file,".*")
 
       file = replace_fixmes(file)
+
     begin
       @hash = YAML.load(file)
     rescue Exception => e
@@ -14,6 +15,7 @@ module Sy18nc
       return
     end
 
+      puts "Start parsing #{name}.."
       # little hack
       # force double-quotes everywhere
       hash.append!("foo \nbar")
@@ -48,6 +50,7 @@ module Sy18nc
       file = File.new(filename, "w+")
       file.write(self.to_yaml)
       file.close
+      puts "Done parsing #{name}."
     end
 
     # little trick:
