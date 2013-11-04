@@ -37,11 +37,13 @@ end
 
 `base_locale` - your base locale, the rest of locales will be synchronized to this one (`en` by default).
 
-`locales_dir` - path to your .ymls with locales (`config/locales` by default)
+`locales_dir` - path to your .ymls with locales (`config/locales` by default).
 
 `locales` - the rest of your locales which you would like to keep in sync with the base one.
 
 `files` - all the files you want to keep in sync with the base one.
+
+`backup` - will save synchronized locales as `.bak` leaving originals alone (set to `false` by default).
 
 Then you can execute
 
@@ -98,7 +100,7 @@ informing you that there is something missing in this locales and you need to fi
 
 ## Issues
 
-Please post any issues via Github Issues. If you want to contribute, see Contributing section on ths page.
+Please post any issues via Github Issues. If you want to contribute, see [Contributing](#Contributing).
 
 ## Contributing
 
