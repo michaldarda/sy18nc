@@ -43,9 +43,9 @@ end
 
 `files` - all the files you want to keep in sync with the base one.
 
-`backup` - will save synchronized locales as `.bak` leaving originals alone (set to `false` by default).
+`backup` - will save synchronized locales as `.bak` leaving originals untouched (is set to `false` by default).
 
-Then you can execute
+Then you can execute:
 
     $ rake sy18nc
 
@@ -57,7 +57,7 @@ It will look for every file in `files` list. For example, for `application` file
 
 Will synchronize the `ru` locale, treating `en` as base.
 
-If run with `-b` or `--backup` option it will add the `.bak` extension to the output files instead of modifying original translation files.
+If run with `-b` or `--backup` option it will add the `.bak` extension to the output files instead of modifying original locale files.
 
 Example:
 
@@ -75,14 +75,14 @@ en.yml:
 
     en:
       application:
-        link1: Hello
-        link2: Hello
+        link1: "Hello"
+        link2: "Hello"
 
 ru.yml:
 
     ru:
       application:
-        link1: Birbevoon
+        link1: "привет"
 
 Command:
 
@@ -92,15 +92,15 @@ Will result in:
 
     ru:
       application:
-        link1: Birbevoon
-        link2: Hello # FIXME
+        link1: "привет"
+        link2: "Hello" # FIXME
 
 As you can see, it imported missing locales from base (en.yml in this case) and added useful `# FIXME` notice,
 informing you that there is something missing in this locales and you need to fix it.
 
 ## Issues
 
-Please post any issues via Github Issues. If you want to contribute, see [Contributing](#Contributing).
+Please post any issues via Github Issues. If you want to contribute, see [Contributing](#contributing).
 
 ## Contributing
 
