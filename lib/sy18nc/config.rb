@@ -12,7 +12,7 @@ module Sy18nc
   end
 
   class Configuration
-    attr_accessor :base_locale, :locales_dir, :files, :locales
+    attr_accessor :base_locale, :locales_dir, :files, :locales, :backup
 
     def initialize
       @base_locale = "en"
