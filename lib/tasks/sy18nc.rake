@@ -1,5 +1,7 @@
 desc "Synchronizes translations according to config in initializer"
 task :sy18nc => :environment do
+  options = Sy18nc.config.backup ? {backup: true} : {}
+
   # synchronize the main files
   files = [Sy18nc.config.locales_dir]
   files << "#{Sy18nc.config.base_locale}.yml"
@@ -8,7 +10,6 @@ task :sy18nc => :environment do
   end
 
   files.flatten!
-  options = {}
 
   synchronizer = Sy18nc::Synchronizer.new(*files, options)
   synchronizer.synchronize_all
@@ -22,7 +23,6 @@ task :sy18nc => :environment do
     end
 
     files.flatten!
-    options = {}
 
     synchronizer = Sy18nc::Synchronizer.new(*files, options)
     synchronizer.synchronize_all

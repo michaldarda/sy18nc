@@ -17,8 +17,9 @@ module Sy18nc
     def initialize
       @base_locale = "en"
       @locales_dir = Dir.pwd + "/config/locales"
-      @locales = []
-      @files = []
+      @backup      = false
+      @locales     = []
+      @files       = []
     end
   end
 end

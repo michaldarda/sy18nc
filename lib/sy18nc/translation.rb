@@ -1,3 +1,5 @@
+require 'psych'
+
 module Sy18nc
   class Translation
     attr_reader :name, :hash
