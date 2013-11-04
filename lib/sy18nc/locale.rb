@@ -1,7 +1,7 @@
 require 'psych'
 
 module Sy18nc
-  class Translation
+  class Locale
     attr_reader :name, :hash
 
     def initialize(file)
@@ -17,7 +17,6 @@ module Sy18nc
       return
     end
 
-      puts "Start parsing #{name}.."
       # little hack
       # force double-quotes everywhere
       hash.append!("foo \nbar")
@@ -52,7 +51,6 @@ module Sy18nc
       file = File.new(filename, "w+")
       file.write(self.to_yaml)
       file.close
-      puts "Done parsing #{name}."
     end
 
     # little trick:

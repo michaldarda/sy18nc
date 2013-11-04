@@ -7,6 +7,6 @@ require_relative '../ext/object'
 
 require_relative 'sy18nc/version'
 require_relative 'sy18nc/synchronizer'
-require_relative 'sy18nc/translation'
+require_relative 'sy18nc/locale'
 require_relative 'sy18nc/config'
 require_relative 'sy18nc/railtie' if defined?(Rails)

@@ -2,22 +2,22 @@ module Sy18nc
   class Synchronizer
     def initialize(*files)
       @options = files.extract_options!
-      @path, @base, *@translations = files
+      @path, @base, *@locales = files
 
       @path = File.expand_path(@path)
 
-      @base = Translation.new("#{@path}/#{@base}")
+      @base = Locale.new("#{@path}/#{@base}")
 
-      @translations = @translations.map do |tfile|
-        Translation.new("#{@path}/#{tfile}")
+      @locales = @locales.map do |tfile|
+        Locale.new("#{@path}/#{tfile}")
       end
     end
 
     def synchronize_all
-      @translations.each do |translation|
-        if translation.synchronizable?
-          translation.synchronize(@base)
-          translation.save(@options.merge(filename: "#{@path}/#{translation.name}"))
+      @locales.each do |locale|
+        if locale.synchronizable?
+          locale.synchronize(@base)
+          locale.save(@options.merge(filename: "#{@path}/#{locale.name}"))
         end
       end
     end
