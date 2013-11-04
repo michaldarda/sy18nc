@@ -2,10 +2,6 @@
 
 Simple tool to synchronize Rails .ymls with locales.
 
-## Requirements
-
-**This gem is compatible with Ruby 2.0 or higher. It will not work with lower Ruby versions.**
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -26,7 +22,7 @@ If you are using this gem with Rails app, you may create an initializer under yo
 
 This command will create it for you:
 
-    $ rake sy18nc:install
+    $ rails generate sy18nc:install
 
 Sample initializer looks like this
 
