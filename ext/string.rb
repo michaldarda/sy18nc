@@ -1,5 +1,5 @@
 class String
-  def mark_fixme!
+  def sy18nc_mark_fixme!
     # skip if it is already marked or its an alias
     if self =~ /g FIXME/ || self =~ /\*([a-z]*(\_)?)*/
       return self
@@ -8,7 +8,7 @@ class String
     self.replace("#{self} g FIXME")
   end
 
-  def append!(val)
+  def sy18nc_append!(val)
     return self if self == ""
 
     self.replace("#{self}#{val}")

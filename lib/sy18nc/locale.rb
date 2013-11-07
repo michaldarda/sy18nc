@@ -19,7 +19,7 @@ module Sy18nc
 
       # little hack
       # force double-quotes everywhere
-      hash.append!("foo \nbar")
+      hash.sy18nc_append!("foo \nbar")
     end
 
     def synchronizable?
@@ -31,7 +31,7 @@ module Sy18nc
     end
 
     def synchronize(other)
-      body.deep_merge!(other.body)
+      body.sy18nc_deep_merge!(other.body)
     end
 
     def to_yaml

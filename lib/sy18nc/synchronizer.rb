@@ -1,7 +1,7 @@
 module Sy18nc
   class Synchronizer
     def initialize(*files)
-      @options = files.extract_options!
+      @options = files.sy18nc_extract_options!
       @path, @base, *@locales = files
 
       @path = File.expand_path(@path)

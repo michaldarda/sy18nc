@@ -3,17 +3,17 @@ require_relative 'spec_helper'
 describe Array do
   it "extracts options" do
     a = [1, 2, 3, 4, { option: true, option2: false }]
-    a.extract_options!.must_equal({ option: true, option2: false })
+    a.sy18nc_extract_options!.must_equal({ option: true, option2: false })
     a.must_equal([1,2,3,4])
 
-    a.extract_options!.must_equal({})
+    a.sy18nc_extract_options!.must_equal({})
     a.must_equal([1,2,3,4])
   end
 
   it "appends" do
     a = ["hello", "world"]
 
-    a.append!("appended_string")
+    a.sy18nc_append!("appended_string")
 
     a.must_equal ["helloappended_string", "worldappended_string"]
   end
@@ -57,7 +57,7 @@ describe Hash do
       }
     }
 
-    @hash.append!("appended_string").must_equal appended_hash
+    @hash.sy18nc_append!("appended_string").must_equal appended_hash
 
     hash2 = {
       :key1 => "helloworld",
@@ -77,7 +77,7 @@ describe Hash do
         ]
       }
 
-    hash2.append!("appended_string").must_equal appended_hash2
+    hash2.sy18nc_append!("appended_string").must_equal appended_hash2
   end
 
   it "deep marks fixme" do
@@ -98,7 +98,7 @@ describe Hash do
       }
     }
 
-    @hash.mark_fixme!
+    @hash.sy18nc_mark_fixme!
     @hash.must_equal fixme_hash
   end
 
@@ -131,7 +131,7 @@ describe Hash do
       }
     }
 
-    other_hash.deep_merge!(@hash).must_equal result
+    other_hash.sy18nc_deep_merge!(@hash).must_equal result
   end
 
   it "deep merges hashes with nested arrays" do
@@ -139,11 +139,11 @@ describe Hash do
 
   describe String do
     it "marks fixme" do
-      "Hello".mark_fixme!.must_equal("Hello g FIXME")
+      "Hello".sy18nc_mark_fixme!.must_equal("Hello g FIXME")
 
-      "Hello g FIXME".mark_fixme!.must_equal("Hello g FIXME")
+      "Hello g FIXME".sy18nc_mark_fixme!.must_equal("Hello g FIXME")
 
-      "*hello_world".mark_fixme!.must_equal("*hello_world")
+      "*hello_world".sy18nc_mark_fixme!.must_equal("*hello_world")
     end
   end
 end

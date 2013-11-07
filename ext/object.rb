@@ -1,9 +1,9 @@
 class Object
-  def append!(val)
+  def sy18nc_append!(val)
     self
   end
 
-  def mark_fixme!
+  def sy18nc_mark_fixme!
     self
   end
 end

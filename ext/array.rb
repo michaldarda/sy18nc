@@ -3,30 +3,30 @@ class Array
   # element in the array if it's a hash, otherwise returns a blank hash.
   #
   #   def options(*args)
-  #     args.extract_options!
+  #     args.sy18nc_extract_options!
   #   end
   #
   #   options(1, 2)           # => {}
   #   options(1, 2, :a => :b) # => {:a=>:b}
-  def extract_options!
-    if last.is_a?(Hash) && last.extractable_options?
+  def sy18nc_extract_options!
+    if last.is_a?(Hash) && last.sy18nc_extractable_options?
       pop
     else
       {}
     end
   end
 
-  def append!(val)
+  def sy18nc_append!(val)
     self.each do |v|
-      v.append!(val)
+      v.sy18nc_append!(val)
     end
 
     self
   end
 
-  def mark_fixme!
+  def sy18nc_mark_fixme!
     self.each do |v|
-      v.mark_fixme!
+      v.sy18nc_mark_fixme!
     end
 
     self
