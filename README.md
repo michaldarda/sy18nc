@@ -6,7 +6,7 @@ Simple tool to synchronize Rails .ymls with locales.
 
 Add this line to your application's Gemfile:
 
-    gem 'sy18nc', '~> 0.0.1'
+    gem 'sy18nc', '~> 0.0.2'
 
 And then execute:
 
