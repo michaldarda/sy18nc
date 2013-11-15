@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/michaldarda/sy18nc.png?branch=master)](https://travis-ci.org/michaldarda/sy18nc)
+
 # Sy18nc
 
 Simple tool to synchronize Rails .ymls with locales.
