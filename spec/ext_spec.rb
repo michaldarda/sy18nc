@@ -134,7 +134,23 @@ describe Hash do
     other_hash.sy18nc_deep_merge!(@hash).should eql(result)
   end
 
-  it "deep merges hashes with nested arrays" do
+  it "deep deletes unused" do
+    hash1 = {
+      :key1 => {
+        :key3 => {}
+      }
+    }
+
+    hash2 = {
+      :key1 => {
+        :key2 => 1,
+        :key3 => {
+          :key4 => 1
+        }
+      }
+    }
+
+    hash2.sy18nc_deep_delete_unused!(hash1).should eql(hash1)
   end
 
   describe String do
