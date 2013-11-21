@@ -80,6 +80,13 @@ ru:
     devise_tr.to_yaml.should eql(File.read(File.expand_path("spec/fixtures/results/devise.tr.yml")))
   end
 
+  it "deletes unused keys" do
+    locale1 = Sy18nc::Locale.new("spec/fixtures/devise.en.yml")
+    locale2 = Sy18nc::Locale.new("spec/fixtures/devise.tr.yml")
+
+    locale1.synchronize(locale2)
+  end
+
   def cleanup
     %x[rm en.yml]
     %x[rm en.yml.bak]
