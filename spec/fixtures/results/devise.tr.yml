@@ -28,7 +28,6 @@ tr:
         other: "%{count} Websites" # FIXME
     omniauth_callbacks:
       success: "Successfully authorized from %{kind} account"
-      empty_key: 
       user:
         failure: "Unexpected Authorization failure, please try again." # FIXME
         range:

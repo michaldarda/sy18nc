@@ -16,6 +16,16 @@ class Hash
     self
   end
 
+  def sy18nc_deep_delete_unused!(other_hash)
+    each_pair do |k, v|
+      if other_hash[k].nil?
+        delete(k)
+      elsif self[k].is_a?(Hash)
+        self[k].sy18nc_deep_delete_unused!(other_hash[k])
+      end
+    end
+  end
+
   # Appends the val to the every string in nested hash
   def sy18nc_append!(val)
     self.each_pair do |key, value|

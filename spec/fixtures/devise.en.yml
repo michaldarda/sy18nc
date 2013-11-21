@@ -55,7 +55,6 @@ en:
         many: "%{count} Websites"
         other: "%{count} Websites"
     omniauth_callbacks:
-      empty_key:
       success: "Successfully authorized from %{kind} account"
       user:
         failure: "Unexpected Authorization failure, please try again."

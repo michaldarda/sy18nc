@@ -49,6 +49,7 @@ module Sy18nc
 
     def synchronize(other)
       body.sy18nc_deep_merge!(other.body)
+      body.sy18nc_deep_delete_unused!(other.body)
     end
 
     def to_yaml
