@@ -1,8 +1,10 @@
 require 'simplecov'
 SimpleCov.start 'rails'
 
-require 'minitest/autorun'
-require 'minitest/spec'
-require 'turn/autorun'
-
 require_relative '../lib/sy18nc.rb'
+
+RSpec.configure do |config|
+  config.failure_color = :magenta
+  config.tty = true
+  config.color = true
+end

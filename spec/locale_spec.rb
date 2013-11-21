@@ -6,80 +6,78 @@ describe Sy18nc::Locale do
   end
 
   it "loads the yaml" do
-    @locale.hash.wont_be_empty
-    @locale.hash.must_be_kind_of Hash
+    @locale.hash.should_not be_empty
+    @locale.hash.should be_a_kind_of(Hash)
 
     locale = Sy18nc::Locale.new("spec/fixtures/devise.tr.yml")
-    locale.hash.wont_be_empty
-    locale.hash.must_be_kind_of Hash
-    assert locale.synchronizable?
+    locale.hash.should_not be_empty
+    locale.hash.should be_a_kind_of(Hash)
+    locale.synchronizable?.should be_true
   end
 
   it "is not synchronizable when YAML is not valid" do
     t = Sy18nc::Locale.new("spec/fixtures/not_valid.yml")
-    refute t.synchronizable?
+    t.synchronizable?.should be_false
   end
 
   it "fetches the locale body" do
-    @locale.body.wont_equal "en"
-    @locale.body.must_be_kind_of Hash
+    @locale.body.should_not eql("en")
+    @locale.body.should be_a_kind_of(Hash)
 
     locale = Sy18nc::Locale.new("spec/fixtures/devise.tr.yml")
-    locale.body.wont_be_empty
-    locale.body.must_be_kind_of Hash
+    locale.body.should_not be_empty
+    locale.body.should be_a_kind_of(Hash)
   end
 
   it "writes the locale to file" do
-    refute File.exists?("en.yml")
+    File.exists?("en.yml").should be_false
     @locale.save
-    assert File.exists?("en.yml")
+    File.exists?("en.yml").should be_true
 
-    refute File.exists?("en.yml.bak")
+    File.exists?("en.yml.bak").should be_false
     @locale.save(backup: true)
-    assert File.exists?("en.yml.bak")
+    File.exists?("en.yml.bak").should be_true
 
-    refute File.exists?("locale_file.yml")
+    File.exists?("locale_file.yml").should be_false
     @locale.save(filename: "locale_file")
-    assert File.exists?("locale_file.yml")
+    File.exists?("locale_file.yml").should be_true
 
-    refute File.exists?("locale_file.yml.bak")
+    File.exists?("locale_file.yml.bak").should be_false
     @locale.save(filename: "locale_file", backup: true)
-    assert File.exists?("locale_file.yml.bak")
+    File.exists?("locale_file.yml.bak").should be_true
 
     cleanup
   end
 
   it "converts locale to yml" do
-    @locale.to_yaml.wont_be_empty
-    @locale.to_yaml.must_be_kind_of String
-    @locale.to_yaml.must_equal %q[---
+    @locale.to_yaml.should_not be_empty
+    @locale.to_yaml.should be_a_kind_of(String)
+    @locale.to_yaml.should eql(%q[---
 en:
   promo:
     link1: "Hello"
     link2: "Hello"
-]
+])
   end
 
   it "synchronizes locales" do
     russian_locale = Sy18nc::Locale.new("spec/fixtures/ru.yml")
     russian_locale.synchronize(@locale)
-    russian_locale.to_yaml.must_equal %q[---
+    russian_locale.to_yaml.should eql(%q[---
 ru:
   promo:
     link1: "Birbevoon"
     link2: "Hello" # FIXME
-]
-    @locale.to_yaml.lines.count.must_equal russian_locale.to_yaml.lines.count
+])
+    @locale.to_yaml.lines.count.should eql(russian_locale.to_yaml.lines.count)
 
     devise_en = Sy18nc::Locale.new("spec/fixtures/devise.en.yml")
     devise_tr = Sy18nc::Locale.new("spec/fixtures/devise.tr.yml")
-    devise_en.to_yaml.lines.count.wont_equal devise_tr.to_yaml.lines.count
+    devise_en.to_yaml.lines.count.should_not eql(devise_tr.to_yaml.lines.count)
 
     devise_tr.synchronize(devise_en)
-    devise_tr.to_yaml.lines.count.must_equal devise_en.to_yaml.lines.count
-    devise_tr.to_yaml.must_equal(File.read(File.expand_path("spec/fixtures/results/devise.tr.yml")))
-
-
+    devise_tr.to_yaml.lines.count.should eql(devise_en.to_yaml.lines.count)
+    devise_tr.to_yaml.should eql(File.read(File.expand_path("spec/fixtures/results/devise.tr.yml")))
   end
 
   def cleanup

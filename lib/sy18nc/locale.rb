@@ -8,7 +8,6 @@ module Sy18nc
       @name = File.basename(file,".*")
 
       file = replace_fixmes(file)
-
     begin
       @hash = YAML.load(file)
     rescue Exception => e

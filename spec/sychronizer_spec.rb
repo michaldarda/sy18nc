@@ -1,11 +1,11 @@
 require_relative 'spec_helper'
 
 describe Sy18nc::Synchronizer do
-  def setup
+  before do
     @synchronizer = Sy18nc::Synchronizer.new("spec/fixtures/", "en.yml" ,"ru.yml", backup: true)
   end
 
-  def teardown
+  after do
     %x[rm spec/fixtures/*.bak]
   end
 
@@ -16,13 +16,13 @@ describe Sy18nc::Synchronizer do
     synchronizer.synchronize_all
     after = File.read(File.expand_path("spec/fixtures/en.yml"))
 
-    after.must_equal before
+    after.should eq before
   end
 
   it "synchronizes translation only once" do
     3.times do
       @synchronizer.synchronize_all
-      File.read(File.expand_path("spec/fixtures/ru.yml.bak")).must_equal %q[---
+      File.read(File.expand_path("spec/fixtures/ru.yml.bak")).should eq %q[---
 ru:
   promo:
     link1: "Birbevoon"
@@ -33,25 +33,25 @@ ru:
     4.times do
       synchronizer = Sy18nc::Synchronizer.new("spec/fixtures/", "devise.en.yml", "devise.tr.yml", backup: true)
       synchronizer.synchronize_all
-      File.read(File.expand_path("spec/fixtures/devise.tr.yml.bak")).must_equal(File.read(File.expand_path("spec/fixtures/results/devise.tr.yml")))
+      File.read(File.expand_path("spec/fixtures/devise.tr.yml.bak")).should eq(File.read(File.expand_path("spec/fixtures/results/devise.tr.yml")))
     end
   end
 
   it "when backup option is set to true saves as a backup file and does not modify original files" do
-    refute File.exists?(File.expand_path("spec/fixtures/ru.yml.bak"))
+    File.exists?(File.expand_path("spec/fixtures/ru.yml.bak")).should be_false
     @synchronizer.synchronize_all
-    assert File.exists?(File.expand_path("spec/fixtures/ru.yml.bak"))
-    File.read(File.expand_path("spec/fixtures/ru.yml.bak")).must_equal %q[---
+    File.exists?(File.expand_path("spec/fixtures/ru.yml.bak")).should be_true
+    File.read(File.expand_path("spec/fixtures/ru.yml.bak")).should eq %q[---
 ru:
   promo:
     link1: "Birbevoon"
     link2: "Hello" # FIXME
 ]
 
-    refute File.exists?(File.expand_path("spec/fixtures/devise.tr.yml.bak"))
+    File.exists?(File.expand_path("spec/fixtures/devise.tr.yml.bak")).should be_false
     synchronizer = Sy18nc::Synchronizer.new("spec/fixtures/", "devise.en.yml", "devise.tr.yml", backup: true)
     synchronizer.synchronize_all
-    assert File.exists?(File.expand_path("spec/fixtures/devise.tr.yml.bak"))
-    File.read(File.expand_path("spec/fixtures/devise.tr.yml.bak")).must_equal(File.read(File.expand_path("spec/fixtures/results/devise.tr.yml")))
+    File.exists?(File.expand_path("spec/fixtures/devise.tr.yml.bak")).should be_true
+    File.read(File.expand_path("spec/fixtures/devise.tr.yml.bak")).should eq(File.read(File.expand_path("spec/fixtures/results/devise.tr.yml")))
   end
 end
