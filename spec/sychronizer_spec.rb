@@ -19,6 +19,15 @@ describe Sy18nc::Synchronizer do
     after.should eq before
   end
 
+  it "creates missing translations" do
+    File.exists?(File.expand_path("spec/fixtures/devise.es.yml")).should be_false
+    synchronizer = Sy18nc::Synchronizer.new("spec/fixtures/", "devise.en.yml", "devise.es.yml")
+    synchronizer.synchronize_all
+
+    File.exists?(File.expand_path("spec/fixtures/devise.es.yml")).should be_true
+    %x[rm spec/fixtures/devise.es.yml]
+  end
+
   it "synchronizes translation only once" do
     3.times do
       @synchronizer.synchronize_all

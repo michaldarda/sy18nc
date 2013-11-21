@@ -5,8 +5,26 @@ module Sy18nc
     attr_reader :name, :hash
 
     def initialize(file)
+      # locale does not exists
+      unless File.exists?(File.expand_path(file))
+        # extracts name from locale file name
+        # ["devise", "en"]
+        tname = file.match(/(([A-z]+\.)*)(yml)$/)[1].split(".")
+        f = File.new(file, "w+")
+
+        # uses fetched keys before to create a skeleton of locale
+        locale_skeleton = tname.inject({}) do |result, k|
+          result[k] = {}
+          result
+        end
+
+        f.write(YAML.dump(locale_skeleton))
+        f.close
+      end
+
       @name = File.basename(file,".*")
 
+      file = File.read(File.expand_path(file))
       file = replace_fixmes(file)
     begin
       @hash = YAML.load(file)
@@ -55,7 +73,6 @@ module Sy18nc
     # little trick:
     # fetch with the comments
     def replace_fixmes(file)
-      file = File.read(File.expand_path(file))
       file.gsub("\' # FIXME", " g FIXME\'")
         .gsub("\" # FIXME", " g FIXME\"")
         .gsub("# FIXME", "g FIXME")
