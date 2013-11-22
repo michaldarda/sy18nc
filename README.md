@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/michaldarda/sy18nc.png?branch=master)](https://travis-ci.org/michaldarda/sy18nc)
+[![Gem Version](https://badge.fury.io/rb/sy18nc.png)](http://badge.fury.io/rb/sy18nc)
 
 # Sy18nc
 
