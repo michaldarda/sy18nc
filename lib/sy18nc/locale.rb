@@ -4,6 +4,13 @@ module Sy18nc
   class Locale
     attr_reader :name, :hash
 
+    # a little helper, move to separate module
+    def nested_hash(keys)
+      head, *tail = keys
+      return {} if head.nil?
+      { head => nested_hash(tail) }
+    end
+
     def initialize(file)
       # locale does not exists
       unless File.exists?(File.expand_path(file))
@@ -13,10 +20,7 @@ module Sy18nc
         f = File.new(file, "w+")
 
         # uses fetched keys before to create a skeleton of locale
-        locale_skeleton = tname.inject({}) do |result, k|
-          result[k] = {}
-          result
-        end
+        locale_skeleton = nested_hash(tname.reverse)
 
         f.write(YAML.dump(locale_skeleton))
         f.close
