@@ -10,7 +10,7 @@ Simple tool to synchronize Rails .ymls with locales.
 Add this line to your application's Gemfile:
 
     group :development do
-      gem 'sy18nc', '~> 0.1.0'
+      gem 'sy18nc', '~> 0.2.1'
     end
 
 And then execute:
@@ -108,6 +108,10 @@ informing you that there is something missing in this locales and you need to fi
 Please post any issues via Github Issues. If you want to contribute, see [Contributing](#contributing).
 
 # Changelog
+
+## 0.2.1
+- Synchronized already synchronized locales already marked as fixme (when key in base locale is changing)
+- Fixed bug with creating translations from scratch
 
 ## 0.1.0
 - Creating translations from scratch
