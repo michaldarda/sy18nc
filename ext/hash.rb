@@ -7,7 +7,7 @@ class Hash
       self_value = self[other_key]
       self[other_key] = if self_value.is_a?(Hash) && other_value.is_a?(Hash)
         self_value.sy18nc_deep_merge!(other_value)
-      elsif self_value.nil?
+      elsif self_value.nil? || self_value.sy18nc_marked_as_fixme?
           other_value.sy18nc_mark_fixme!
       else
         self_value
