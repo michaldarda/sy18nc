@@ -57,6 +57,7 @@ en:
   promo:
     link1: "Hello"
     link2: "Hello"
+    link3: "Hello"
 ])
   end
 
@@ -67,6 +68,7 @@ en:
 ru:
   promo:
     link1: "Birbevoon"
+    link3: "Hello" # FIXME
     link2: "Hello" # FIXME
 ])
     @locale.to_yaml.lines.count.should eql(russian_locale.to_yaml.lines.count)

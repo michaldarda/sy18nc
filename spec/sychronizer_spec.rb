@@ -35,6 +35,7 @@ describe Sy18nc::Synchronizer do
 ru:
   promo:
     link1: "Birbevoon"
+    link3: "Hello" # FIXME
     link2: "Hello" # FIXME
 ]
     end
@@ -54,6 +55,7 @@ ru:
 ru:
   promo:
     link1: "Birbevoon"
+    link3: "Hello" # FIXME
     link2: "Hello" # FIXME
 ]
 
