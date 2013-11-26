@@ -3,15 +3,19 @@
 
 # Sy18nc
 
-Simple tool to synchronize Rails .ymls with locales.
+Sy18nc is a simple tool for synchronizing i18n YAML files across different language versions.
+
+When working with multiple language versions of your Rails app, it can be hard to keep all of the i18n files up-to-date. Sy18nc frees you from having to manually copy & paste each change from the base .yml file to other language files. With Sy18n you can simply edit your base i18n file (e.g. en.yml) and run a single command - all new/changed keys will be automatically added to other language versions (with annotations, so you can easily find ones that need to be translated).
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    group :development do
-      gem 'sy18nc', '~> 0.2.1'
-    end
+```ruby
+group :development do
+  gem 'sy18nc', '~> 0.2.1'
+end
+```
 
 And then execute:
 
