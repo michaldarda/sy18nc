@@ -113,8 +113,12 @@ Please post any issues via Github Issues. If you want to contribute, see [Contri
 
 # Changelog
 
+## 0.3.0
+- Bugfixes
+- Deleting keys deleted from base locale
+
 ## 0.2.1
-- Synchronized already synchronized locales already marked as fixme (when key in base locale is changing)
+- Synchronizing already synchronized keys already marked as fixme (when key in base locale is changing)
 - Fixed bug with creating translations from scratch
 
 ## 0.1.0

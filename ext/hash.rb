@@ -13,6 +13,9 @@ class Hash
         self_value
       end
     end
+
+    self.sy18nc_deep_delete_unused!(other_hash)
+
     self
   end
 
