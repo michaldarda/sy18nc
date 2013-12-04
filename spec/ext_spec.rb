@@ -158,8 +158,6 @@ describe Hash do
       "Hello".sy18nc_mark_fixme!.should eql("Hello g FIXME")
 
       "Hello g FIXME".sy18nc_mark_fixme!.should eql("Hello g FIXME")
-
-      "*hello_world".sy18nc_mark_fixme!.should eql("*hello_world")
     end
   end
 end

@@ -4,7 +4,7 @@ class String
   end
 
   def sy18nc_mark_fixme!
-    self if sy18nc_marked_as_fixme?
+    return self if sy18nc_marked_as_fixme?
 
     self.replace("#{self} g FIXME")
   end
