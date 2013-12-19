@@ -2,6 +2,12 @@
 class Hash
   # Merge the two nested hashes, if the key is missing,
   # we replace it and deeply mark fixme
+ def self.sy18nc_nested_hash(keys)
+    head, *tail = keys
+    return {} if head.nil?
+    { head => sy18nc_nested_hash(tail) }
+  end
+
   def sy18nc_deep_merge!(other_hash)
     other_hash.each_pair do |other_key, other_value|
       self_value = self[other_key]

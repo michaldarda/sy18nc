@@ -1,46 +1,38 @@
+# here I'm forcing it to use psych instead of standard Ruby parser
+# this is to make this work with Ruby 1.9, probably won't be needed
+# after upgrade to Ruby 2.0 or higher
 require 'psych'
 
 module Sy18nc
   class Locale
     attr_reader :name, :hash
 
-    # a little helper, move to separate module
-    def nested_hash(keys)
-      head, *tail = keys
-      return {} if head.nil?
-      { head => nested_hash(tail) }
-    end
-
     def initialize(file)
-      # locale does not exists
-      unless File.exists?(File.expand_path(file))
-        # extracts name from locale file name
-        # ["devise", "en"]
-        tname = file.match(/(([A-z]+\.)*)(yml)$/)[1].split(".")
-        f = File.new(file, "w+")
-
-        # uses fetched keys before to create a skeleton of locale
-        locale_skeleton = nested_hash(tname.reverse)
-
-        f.write(YAML.dump(locale_skeleton))
-        f.close
-      end
+      create_new_locale_file(file) unless File.exists?(File.expand_path(file))
 
       @name = File.basename(file,".*")
+      file  = File.read(File.expand_path(file))
+      file  = replace_fixmes(file)
 
-      file = File.read(File.expand_path(file))
-      file = replace_fixmes(file)
-    begin
       @hash = YAML.load(file)
-    rescue Exception => e
+      @hash.sy18nc_append!("foo \nbar")
+    rescue Psych::SyntaxError => e
       puts "Problem with parsing #{name}, check if this is a valid YAML file http://yamllint.com/."
       puts e.message
       return
     end
 
-      # little hack
-      # force double-quotes everywhere
-      hash.sy18nc_append!("foo \nbar")
+    def create_new_locale_file(file)
+      # extracts name from locale file name
+      # and creates an array ["devise", "en"]
+      tname = file.match(/(([A-z]+\.)*)(yml)$/)[1].split(".")
+      f = File.new(file, "w+")
+
+      # uses fetched keys before to create a skeleton of locale
+      locale_skeleton = Hash.sy18nc_nested_hash(tname.reverse)
+
+      f.write(YAML.dump(locale_skeleton))
+      f.close
     end
 
     def synchronizable?
@@ -57,10 +49,10 @@ module Sy18nc
     end
 
     def to_yaml
-      # disable line wrap
+      # disable line wrapping
       yaml = YAML.dump(hash, line_width: -1)
 
-      # force double quotes in every value
+      # hack to force double quotes in every value
       yaml.gsub!("foo \\nbar","")
       restore_fixmes(yaml)
     end
@@ -75,16 +67,14 @@ module Sy18nc
       file.close
     end
 
-    # little trick:
-    # fetch with the comments
+    # hack to fetch yaml with the comments
     def replace_fixmes(file)
       file.gsub("\' # FIXME", " g FIXME\'")
         .gsub("\" # FIXME", " g FIXME\"")
         .gsub("# FIXME", "g FIXME")
     end
 
-    # little trick:
-    # restore fixmes
+    # hack to restore fixmes
     def restore_fixmes(file)
       file.gsub("\sg FIXME\"", "\" # FIXME")
         .gsub("\sg FIXME\'", "\' # FIXME")
