@@ -82,16 +82,21 @@ Lets assume we have two locales:
 
 en.yml:
 
-    en:
-      application:
-        link1: "Hello"
-        link2: "Hello"
+```yaml
+en:
+  application:
+    link1: "Hello"
+    link2: "Hello"
+```
+
 
 ru.yml:
 
-    ru:
-      application:
-        link1: "привет"
+```yaml
+ru:
+  application:
+    link1: "привет"
+```
 
 Command:
 
@@ -99,10 +104,12 @@ Command:
 
 Will result in:
 
-    ru:
-      application:
-        link1: "привет"
-        link2: "Hello" # FIXME
+```yaml
+ru:
+  application:
+    link1: "привет"
+    link2: "Hello" # FIXME
+```
 
 As you can see, it imported missing locales from base (en.yml in this case) and added useful `# FIXME` notice,
 informing you that there is something missing in this locales and you need to fix it.
