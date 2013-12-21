@@ -3,10 +3,11 @@ task :sy18nc => :environment do
   options = Sy18nc.config.backup ? {backup: true} : {}
 
   # synchronize the main files
+  # for example en.yml, de.yml, es.yml
   files = [Sy18nc.config.locales_dir]
   files << "#{Sy18nc.config.base_locale}.yml"
-  files << Sy18nc.config.locales.map do |l|
-    "#{l}.yml"
+  files << Sy18nc.config.locales.map do |locale|
+    "#{locale}.yml"
   end
 
   files.flatten!
@@ -15,11 +16,12 @@ task :sy18nc => :environment do
   synchronizer.synchronize_all
 
   # synchronize the rest of files
-  Sy18nc.config.files.each do |s|
+  # devise.en.yml, devise.de.yml, devise.es.yml
+  Sy18nc.config.files.each do |file|
     files = [Sy18nc.config.locales_dir]
-    files << "#{s}.#{Sy18nc.config.base_locale}.yml"
-    files << Sy18nc.config.locales.map do |l|
-      "#{s}.#{l}.yml"
+    files << "#{file}.#{Sy18nc.config.base_locale}.yml"
+    files << Sy18nc.config.locales.map do |locale|
+      "#{file}.#{locale}.yml"
     end
 
     files.flatten!

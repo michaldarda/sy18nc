@@ -39,8 +39,8 @@ Sample initializer looks like this
 Sy18nc.configure do |c|
   c.base_locale = "en"
   c.locales_dir = "config/locales/"
-  c.locales = ["de", "es", "fr", "pl"]
-  c.files = ["application", "devise", "doorkeeper"]
+  c.locales     = ["de", "es", "fr", "pl"]
+  c.files       = ["application", "devise", "doorkeeper"]
 end
 ```
 
