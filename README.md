@@ -13,7 +13,7 @@ Add this line to your application's Gemfile:
 
 ```ruby
 group :development do
-  gem 'sy18nc', '~> 0.2.1'
+  gem 'sy18nc', '~> 0.3.1'
 end
 ```
 
@@ -120,7 +120,7 @@ Please post any issues via Github Issues. If you want to contribute, see [Contri
 
 # Changelog
 
-## 0.3.0
+## 0.3.1
 - Bugfixes
 - Deleting keys deleted from base locale
 
