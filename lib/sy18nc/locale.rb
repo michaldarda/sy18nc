@@ -13,11 +13,11 @@ module Sy18nc
 
       # than we load this file
       @name = File.basename(file,".*")
-      @file = File.read(File.expand_path(file))
-      @file = replace_fixmes
+      @yaml = File.read(File.expand_path(file))
+      @yaml = replace_fixmes
 
       # and we load yaml from file
-      @hash = YAML.load(@file)
+      @hash = YAML.load(@yaml)
       @hash.sy18nc_append!("foo \nbar")
     rescue Psych::SyntaxError => e
       puts "Problem with parsing #{name}, check if this is a valid YAML file http://yamllint.com/.\n #{e.message}"
@@ -49,10 +49,10 @@ module Sy18nc
 
     def to_yaml
       # disable line wrapping
-      @file = YAML.dump(hash, line_width: -1)
+      @yaml = YAML.dump(hash, line_width: -1)
 
       # hack to force double quotes in every value
-      @file.gsub!("foo \\nbar","")
+      @yaml.gsub!("foo \\nbar","")
       restore_fixmes
     end
 
@@ -68,14 +68,14 @@ module Sy18nc
 
     # hack to fetch yaml with the comments
     def replace_fixmes
-      @file.gsub("\' # FIXME", " g FIXME\'")
+      @yaml.gsub("\' # FIXME", " g FIXME\'")
         .gsub("\" # FIXME", " g FIXME\"")
         .gsub("# FIXME", "g FIXME")
     end
 
     # hack to restore fixmes
     def restore_fixmes
-      @file.gsub("\sg FIXME\"", "\" # FIXME")
+      @yaml.gsub("\sg FIXME\"", "\" # FIXME")
         .gsub("\sg FIXME\'", "\' # FIXME")
         .gsub("g FIXME", "# FIXME")
         .gsub("\"# FIXME\"", "# FIXME")
