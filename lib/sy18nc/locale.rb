@@ -8,18 +8,20 @@ module Sy18nc
     attr_reader :name, :hash
 
     def initialize(file)
+      # create new yaml (file and localition)
       create_new_locale_file(file) unless File.exists?(File.expand_path(file))
 
+      # than we load this file
       @name = File.basename(file,".*")
       file  = File.read(File.expand_path(file))
       file  = replace_fixmes(file)
 
+      # and we load yaml from file
       @hash = YAML.load(file)
       @hash.sy18nc_append!("foo \nbar")
     rescue Psych::SyntaxError => e
       puts "Problem with parsing #{name}, check if this is a valid YAML file http://yamllint.com/."
       puts e.message
-      return
     end
 
     def create_new_locale_file(file)
