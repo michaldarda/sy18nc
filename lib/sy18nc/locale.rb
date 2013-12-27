@@ -20,21 +20,18 @@ module Sy18nc
       @hash = YAML.load(file)
       @hash.sy18nc_append!("foo \nbar")
     rescue Psych::SyntaxError => e
-      puts "Problem with parsing #{name}, check if this is a valid YAML file http://yamllint.com/."
-      puts e.message
+      puts "Problem with parsing #{name}, check if this is a valid YAML file http://yamllint.com/.\n #{e.message}"
     end
 
     def create_new_locale_file(file)
       # extracts name from locale file name
       # and creates an array ["devise", "en"]
       tname = file.match(/(([A-z]+\.)*)(yml)$/)[1].split(".")
-      f = File.new(file, "w+")
-
-      # uses fetched keys before to create a skeleton of locale
-      locale_skeleton = Hash.sy18nc_nested_hash(tname.reverse)
-
-      f.write(YAML.dump(locale_skeleton))
-      f.close
+      File.open(file, "w+") do |f|
+        # uses fetched keys before to create a skeleton of locale
+        locale_skeleton = Hash.sy18nc_nested_hash(tname.reverse)
+        f.write(YAML.dump(locale_skeleton))
+      end
     end
 
     def synchronizable?
@@ -64,9 +61,9 @@ module Sy18nc
       filename = "#{filename}.yml"
       filename = "#{filename}.bak" if options[:backup]
 
-      file = File.new(filename, "w+")
-      file.write(self.to_yaml)
-      file.close
+      File.open(filename, "w+") do |f|
+        f.write(self.to_yaml)
+      end
     end
 
     # hack to fetch yaml with the comments
