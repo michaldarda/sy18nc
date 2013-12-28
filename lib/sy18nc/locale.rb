@@ -18,7 +18,7 @@ module Sy18nc
 
       # and we load yaml from file
       @hash = YAML.load(@yaml)
-      @hash.sy18nc_append!("foo \nbar")
+      @hash.append!("foo \nbar")
     rescue Psych::SyntaxError => e
       puts "Problem with parsing #{name}, check if this is a valid YAML file http://yamllint.com/.\n #{e.message}"
     end
@@ -29,7 +29,7 @@ module Sy18nc
       tname = file.match(/(([A-z]+\.)*)(yml)$/)[1].split(".")
       File.open(file, "w+") do |f|
         # uses fetched keys before to create a skeleton of locale
-        locale_skeleton = Hash.sy18nc_nested_hash(tname.reverse)
+        locale_skeleton = Hash.skeleton(tname.reverse)
         f.write(YAML.dump(locale_skeleton))
       end
     end
@@ -38,13 +38,15 @@ module Sy18nc
       !!hash
     end
 
+    # returns the real translation body
+    # without 'headers'
     def body
       hash[hash.keys.first]
     end
 
     def synchronize(other)
-      body.sy18nc_deep_merge!(other.body)
-      body.sy18nc_deep_delete_unused!(other.body)
+      body.deep_merge_fixme!(other.body)
+      body.deep_delete_unused!(other.body)
     end
 
     def to_yaml
