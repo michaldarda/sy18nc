@@ -20,15 +20,11 @@ class Array
     self.each do |v|
       v.append!(value)
     end
-
-    self
   end
 
   def mark_fixme!
     self.each do |v|
       v.mark_fixme!
     end
-
-    self
   end
 end

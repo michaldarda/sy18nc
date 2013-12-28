@@ -37,20 +37,16 @@ class Hash
   # Appends the val to the every string in nested hash
   def append!(value)
     self.each_pair do |k, v|
-      self[k] = v.append!(value)
+      v.append!(value)
     end
-
-    self
   end
 
   # Marks the nested hash values with g FIXME
   # see also mark_fixme! in string
   def mark_fixme!
     self.each_pair do |k, v|
-      self[k] = v.mark_fixme!
+      v.mark_fixme!
     end
-
-    self
   end
 
   # By default, only instances of Hash itself are extractable.
