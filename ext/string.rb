@@ -6,12 +6,12 @@ class String
   def mark_fixme!
     return self if marked_fixme?
 
-    self.replace("#{self} g FIXME")
+    self.append!(" g FIXME")
   end
 
   def append!(value)
-    return self if self == ""
+    return self if empty?
 
-    self.replace("#{self}#{value}")
+    self << value
   end
 end

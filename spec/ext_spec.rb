@@ -1,21 +1,90 @@
 require_relative 'spec_helper'
 
-describe Array do
-  it "extracts options" do
-    a = [1, 2, 3, 4, { option: true, option2: false }]
-    a.extract_options!.should eql({ option: true, option2: false })
-    a.should eql([1,2,3,4])
-
-    a.extract_options!.should eql({})
-    a.should eql([1,2,3,4])
+describe Object do
+  describe "#marked_fixme?" do
+    subject { Object.new.marked_fixme? }
+    it { should be_false }
   end
 
-  it "appends" do
-    a = ["hello", "world"]
+  describe "#append!" do
+    before { @object = Object.new.append!("somestring") }
+    subject { @object }
+    it { should eq @object }
+  end
 
-    a.append!("appended_string")
+  describe "#mark_fixme!" do
+    before { @object = Object.new.mark_fixme! }
+    subject { @object }
+    it { should eq @object }
+  end
+end
 
-    a.should eql(["helloappended_string", "worldappended_string"])
+describe Array do
+  describe "#extract_options!" do
+    subject { [1, 2, 3, 4, options].extract_options! }
+
+    context "when contains options" do
+      let(:options) { { option: true, option2: false } }
+      it { should eq options }
+    end
+
+    context "when contains no options" do
+      let(:options) { nil }
+      it { should be_empty }
+    end
+  end
+
+  describe "#append!" do
+    subject { ["hello", "world"].append!("appended_string") }
+    it { should eq ["helloappended_string", "worldappended_string"] }
+  end
+
+  describe "#mark_fixme!" do
+    subject { ["Hello", 1, 2, 3, "String"].mark_fixme! }
+    it { should eq ["Hello g FIXME", 1, 2, 3, "String g FIXME"] }
+  end
+end
+
+describe String do
+  describe "#marked_fixme?" do
+    subject { "Hello#{suffix}".marked_fixme? }
+
+    context "when marked fixme" do
+      let(:suffix) { "g FIXME" }
+      it { should be_true }
+    end
+
+    context "when not marked fixme" do
+      let(:suffix) { "" }
+      it { should be_false }
+    end
+  end
+
+  describe "#mark_fixme!" do
+    subject { "Hello #{suffix}".mark_fixme! }
+
+    context "already marked fixme" do
+      let(:suffix) { "g FIXME" }
+      it { should eq "Hello g FIXME" }
+    end
+
+    context "not marked yet" do
+      let(:suffix) { "" }
+      it { should eq "Hello  g FIXME" }
+    end
+  end
+
+  describe "#append!" do
+    subject { "#{string}".append!("hello") }
+    context "empty" do
+      let(:string) { "" }
+      it { should be_empty }
+    end
+
+    context "any other string" do
+      let(:string) { "helloworld" }
+      it { should eq "helloworldhello" }
+    end
   end
 end
 
@@ -151,13 +220,5 @@ describe Hash do
     }
 
     hash2.deep_delete_unused!(hash1).should eql(hash1)
-  end
-
-  describe String do
-    it "marks fixme" do
-      "Hello".mark_fixme!.should eql("Hello g FIXME")
-
-      "Hello g FIXME".mark_fixme!.should eql("Hello g FIXME")
-    end
   end
 end
