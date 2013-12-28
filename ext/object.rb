@@ -1,13 +1,13 @@
 class Object
-  def sy18nc_marked_as_fixme?
+  def marked_fixme?
     false
   end
 
-  def sy18nc_append!(val)
+  def append!(value)
     self
   end
 
-  def sy18nc_mark_fixme!
+  def mark_fixme!
     self
   end
 end

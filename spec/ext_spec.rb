@@ -3,17 +3,17 @@ require_relative 'spec_helper'
 describe Array do
   it "extracts options" do
     a = [1, 2, 3, 4, { option: true, option2: false }]
-    a.sy18nc_extract_options!.should eql({ option: true, option2: false })
+    a.extract_options!.should eql({ option: true, option2: false })
     a.should eql([1,2,3,4])
 
-    a.sy18nc_extract_options!.should eql({})
+    a.extract_options!.should eql({})
     a.should eql([1,2,3,4])
   end
 
   it "appends" do
     a = ["hello", "world"]
 
-    a.sy18nc_append!("appended_string")
+    a.append!("appended_string")
 
     a.should eql(["helloappended_string", "worldappended_string"])
   end
@@ -57,7 +57,7 @@ describe Hash do
       }
     }
 
-    @hash.sy18nc_append!("appended_string").should eql(appended_hash)
+    @hash.append!("appended_string").should eql(appended_hash)
 
     hash2 = {
       :key1 => "helloworld",
@@ -77,7 +77,7 @@ describe Hash do
         ]
       }
 
-    hash2.sy18nc_append!("appended_string").should eql(appended_hash2)
+    hash2.append!("appended_string").should eql(appended_hash2)
   end
 
   it "deep marks fixme" do
@@ -98,7 +98,7 @@ describe Hash do
       }
     }
 
-    @hash.sy18nc_mark_fixme!
+    @hash.mark_fixme!
     @hash.should eql(fixme_hash)
   end
 
@@ -131,7 +131,7 @@ describe Hash do
       }
     }
 
-    other_hash.sy18nc_deep_merge!(@hash).should eql(result)
+    other_hash.deep_merge_fixme!(@hash).should eql(result)
   end
 
   it "deep deletes unused" do
@@ -150,14 +150,14 @@ describe Hash do
       }
     }
 
-    hash2.sy18nc_deep_delete_unused!(hash1).should eql(hash1)
+    hash2.deep_delete_unused!(hash1).should eql(hash1)
   end
 
   describe String do
     it "marks fixme" do
-      "Hello".sy18nc_mark_fixme!.should eql("Hello g FIXME")
+      "Hello".mark_fixme!.should eql("Hello g FIXME")
 
-      "Hello g FIXME".sy18nc_mark_fixme!.should eql("Hello g FIXME")
+      "Hello g FIXME".mark_fixme!.should eql("Hello g FIXME")
     end
   end
 end

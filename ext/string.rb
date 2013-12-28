@@ -1,17 +1,17 @@
 class String
-  def sy18nc_marked_as_fixme?
+  def marked_fixme?
     self =~ /g FIXME/
   end
 
-  def sy18nc_mark_fixme!
-    return self if sy18nc_marked_as_fixme?
+  def mark_fixme!
+    return self if marked_fixme?
 
     self.replace("#{self} g FIXME")
   end
 
-  def sy18nc_append!(val)
+  def append!(value)
     return self if self == ""
 
-    self.replace("#{self}#{val}")
+    self.replace("#{self}#{value}")
   end
 end
